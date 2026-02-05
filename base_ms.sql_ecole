@@ -1,0 +1,33 @@
+CREATE DATABASE ecole;
+USE ecole;
+
+CREATE TABLE etudiants (
+    id_etudiant INT PRIMARY KEY AUTO_INCREMENT,
+    nom VARCHAR(50),
+    prenom VARCHAR(50),
+    date_naissance DATE,
+    sexe VARCHAR(10)
+);
+
+CREATE TABLE enseignants (
+    id_enseignant INT PRIMARY KEY AUTO_INCREMENT,
+    nom VARCHAR(50),
+    prenom VARCHAR(50),
+    specialite VARCHAR(100)
+);
+
+CREATE TABLE cours (
+    id_cours INT PRIMARY KEY AUTO_INCREMENT,
+    nom_cours VARCHAR(100),
+    id_enseignant INT,
+    FOREIGN KEY (id_enseignant) REFERENCES enseignants(id_enseignant)
+);
+
+CREATE TABLE notes (
+    id_note INT PRIMARY KEY AUTO_INCREMENT,
+    id_etudiant INT,
+    id_cours INT,
+    note DECIMAL(5,2),
+    FOREIGN KEY (id_etudiant) REFERENCES etudiants(id_etudiant),
+    FOREIGN KEY (id_cours) REFERENCES cours(id_cours)
+);
